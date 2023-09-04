@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@abandonware/bleno": "^0.6.1",
+    "@abandonware/bluetooth-hci-socket": "^0.5.3-10",
+    "@abandonware/noble": "^1.9.2-9",
+    "@xyo-network/ble-central.noble": "^0.109.0",
+    "@xyo-network/bridge.pi": "^0.131.0"
+  }
+}

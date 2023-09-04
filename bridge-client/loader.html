@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+	<head>
+    <title>XYO Bridge Initializing</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Titillium Web,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;
+      }
+      #splash-loader {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #190e25;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s linear 0s, opacity 0.3s ease-in 0s;
+        z-index: 1;
+        height: 100vh;
+        width: 100vw;
+      }
+
+      #splash-loader.visible {
+        visibility: visible;
+        transition: visibility 0s linear 0.3s, opacity 0.3s ease-in 0s;
+        opacity: 1;
+      }
+
+      .vh-100 {
+        height: 100vh;
+      }
+
+      #splash-loader .loading {
+        animation-play-state: paused;
+      }
+
+      #splash-loader.visible .loading {
+        animation-play-state: running;
+      }
+
+      #splash-loader.visible.paused .loading {
+        animation-play-state: paused;
+      }
+
+      #splash-loader.visible.stopped .loading {
+        animation: none;
+      }
+
+      .loading {
+        animation: bounce 2s linear 0s infinite;
+      }
+
+      @keyframes loader {
+        0% {
+          transform: rotate3d(1, 0.2, 0.5, 0deg) scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: rotate3d(1, 0.2, 0.5, 360deg) scale(0.8);
+          opacity: 0.2;
+        }
+        100% {
+          transform: rotate3d(1, 0.2, 0.5, 0deg) scale(1);
+          opacity: 1;
+        }
+      }
+
+      @keyframes bounce {
+        ​0% {
+          transform: translateY(0);
+        }
+        25% {
+          transform: translateY(-25px);
+        }
+        75% {
+          transform: translateY(25px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+      #splash-bounce {
+        height: 60px;
+      }
+      .bounce1 {
+        fill: #69a7d8;
+        animation: bounce 1s linear infinite;
+      }
+      .bounce2 {
+        fill: #ee7f4d;
+        animation: bounce 1s linear infinite;
+        animation-delay: 0.2s;
+      }
+      .bounce3 {
+        fill: #e35082;
+        animation: bounce 1s linear infinite;
+        animation-delay: 0.4s;
+      }
+    </style>
+  </head>
+	<body>
+		<div id="splash-loader" class="visible">
+      <svg
+        version="1.1"
+        id="splash-bounce"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlnsXlink="http://www.w3.org/1999/xlink"
+        x="0px"
+        y="0px"
+        viewBox="0 0 355.6 114.1"
+      >
+        <circle class="bounce1" cx="62" cy="56.2" r="20.7" />
+        <circle class="bounce2" cx="182.2" cy="56.2" r="20.7" />
+        <circle class="bounce3" cx="302.3" cy="56.2" r="20.7" />
+      </svg>
+      <noscript style="color: white; margin-top: 8px;">
+        You need to enable JavaScript to run this app.
+      </noscript>
+      <div style="color: white; margin-top: 8px;">
+        Initializing Bridge
+      </div>
+    </div>
+		<script>
+			let timeout
+			function loadImage (src) {
+				const img = new Image()
+				img.src = src
+				return new Promise((res, rej) => {
+					img.onload = () => res()
+					img.onerror = () => rej()
+					setTimeout(() =>  {
+						rej()
+					}, 1000)	
+				})
+			}
+			function load () {
+				loadImage('http://localhost/logo.png')
+				.then(() => {
+					window.location.href = 'http://localhost'
+				})
+				.catch(() => {
+					clearTimeout(timeout)
+					timeout = setTimeout(() => {
+						load()	
+					}, 5000)
+				})
+			}
+			load()
+		</script>
+	</body>
+</html>

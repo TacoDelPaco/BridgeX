@@ -1,0 +1,54 @@
+{
+  "name": "@abandonware/bleno",
+  "version": "0.6.1",
+  "description": "A Node.js module for implementing BLE (Bluetooth Low Energy) peripherals",
+  "main": "index.js",
+  "engines": {
+    "node": ">=14"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "android",
+    "freebsd",
+    "win32"
+  ],
+  "scripts": {
+    "pretest": "jshint *.js lib/. test/. examples/.",
+    "test": "mocha -R spec test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abandonware/bleno"
+  },
+  "keywords": [
+    "BLE",
+    "Bluetooth",
+    "Bluetooth Low Energy",
+    "Bluetooth Smart",
+    "peripheral"
+  ],
+  "author": "Sandeep Mistry",
+  "maintainers": [
+    "Jacob Rosenthal"
+  ],
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "jshint": "~2.13.6",
+    "should": "~13.2.3",
+    "mocha": "~10.2.0",
+    "node-blink1": "~0.5.1"
+  },
+  "dependencies": {
+    "debug": "^4.3.4",
+    "napi-thread-safe-callback": "0.0.6",
+    "node-addon-api": "^6.1.0"
+  },
+  "optionalDependencies": {
+    "@abandonware/bluetooth-hci-socket": "^0.5.3-10",
+    "bplist-parser": "0.3.2",
+    "xpc-connect": "^3.0.0"
+  },
+  "types": "./index.d.ts"
+}
