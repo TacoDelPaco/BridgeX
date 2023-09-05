@@ -59,4 +59,5 @@ Restart=on-failure
 WantedBy=multi-user.target
 ```
 5. Run `sudo systemctl enable xyo-bridge && sudo systemctl start xyo-bridge`
+
 You should now have a fully automated BridgeX running on an updated NodeJS, OS, RPiZ2W, etc.
