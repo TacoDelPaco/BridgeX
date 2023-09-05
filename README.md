@@ -5,6 +5,7 @@ It basically is an upgrade to using [@abandonware/bleno](https://github.com/aban
 
 I will try to document my process and guide through the installation, feel free to message me if you have any questions. I will also make quality of life changes throughout the codebase, as there is a lot of unneccesary or unused portions.
 
+### Raspberry Pi Zero 1.1 W and original img
 If you're wanting to use the original **bridgex.img** with the RPiZW, you can simply run `sudo npm rebuild` in `/usr/lib/node_modules/` to get it running and you don't need this repo.
 
 **Note:** I've tested this with Raspbian OS 11 on a Raspberry Pi Zero 2 W and with Raspbian OS 10 on a Raspberry Pi Zero 1.1 W
@@ -17,7 +18,7 @@ If you're wanting to use the original **bridgex.img** with the RPiZW, you can si
 Everything should be running, although you may want to put it in a `screen` or `tmux` to be able to run in the background. The web side of things also doesn't work, as it requires more steps which I include in the next section.
 
 ## Everything Else
-*Note:* Be sure and edit `<RPi USERNAME>` in each file to whatever you set the Raspbian OS username to when setting it up/formatting
+**Note:** Be sure and edit `<RPi USERNAME>` in each file to whatever you set the Raspbian OS username to when setting it up/formatting
 1. Create a file at `/etc/xdg/lxsession/LXDE-pi/autostart` and paste the following:
 ```
 #@lxpanel --profile LXDE-pi
