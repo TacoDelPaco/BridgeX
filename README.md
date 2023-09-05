@@ -1,7 +1,7 @@
 # BridgeX Modified
 I created this repository as a reference for anyone wanting to setup a BridgeX on a Raspberry Pi Zero 1.1/2 W, but theoretically it should work on just about anything.
 
-It basically is an upgrade to using [@abandonware/bleno](https://github.com/abandonware/bleno), [@abandonware/noble](https://github.com/abandonware/noble) and [@abandonware/bluetooth-hci-socket](https://github.com/abandonware/bluetooth-hci-socket) which allows NodeJS 12+ to be used inconjunction with the latest Raspbian OS.
+It basically is an upgrade to using [@abandonware/bleno](https://github.com/abandonware/bleno), [@abandonware/noble](https://github.com/abandonware/noble) and [@abandonware/bluetooth-hci-socket](https://github.com/abandonware/bluetooth-hci-socket) which allows NodeJS 12+ (I'm using 20.5.1 with [NVM](https://github.com/nvm-sh/nvm)) to be used inconjunction with the latest Raspbian OS.
 
 I will try to document my process and guide through the installation, feel free to message me if you have any questions. I will also make quality of life changes throughout the codebase, as there is a lot of unneccesary or unused portions.
 
@@ -10,9 +10,9 @@ If you're wanting to use the original **bridgex.img** with the RPiZW, you can si
 
 **Note:** I've tested this with Raspbian OS 11 on a Raspberry Pi Zero 2 W and with Raspbian OS 10 on a Raspberry Pi Zero 1.1 W
 ## Bare Minimum
-1. Clone the repository
+1. Clone the repository in home directory
    `git clone https://github.com/TacoDelPaco/BridgeX`
-2. Run `npm rebuild` in the root of the directory
+2. Run `npm rebuild` in the root of the project directory
 3. Run `node node_modules/@xyo-network/bridge.pi/bin/start.js`
 
 Everything should be running, although you may want to put it in a `screen` or `tmux` to be able to run in the background. The web side of things also doesn't work, as it requires more steps which I include in the next section.
@@ -27,13 +27,13 @@ Everything should be running, although you may want to put it in a `screen` or `
 @xset s off
 @xset -dpms
 @xset s noblank
-@chromium-browser --noerrdialogs --disable-infobars --kiosk --app=file:///home/<RPi USERNAME>/bridge-client/loader.html
+@chromium-browser --noerrdialogs --disable-infobars --kiosk --app=file:///home/<RPi USERNAME>/BridgeX/bridge-client/loader.html
 ```
-2. Create a symbolic link `sudo ln -s /home/<RPi USERNAME>/node_modules/@xyo-network/bridge.pi/bin/start.js /usr/bin/xyo-pi-bridge` and edit the file:
+2. Create a symbolic link `sudo ln -s /home/<RPi USERNAME>/BridgeX/node_modules/@xyo-network/bridge.pi/bin/start.js /usr/bin/xyo-pi-bridge` and edit the file:
 ```
 #!/usr/bin/env node
 
-const { main } = require('/home/<RPi USERNAME>/node_modules/@xyo-network/bridge.pi/dist/index.js');
+const { main } = require('/home/<RPi USERNAME>/BridgeX/node_modules/@xyo-network/bridge.pi/dist/index.js');
 
 main()
 ```
@@ -41,7 +41,7 @@ main()
 ```
 #!/bin/bash
 
-sudo PORT=80 STORE=/home/<RPi USERNAME>/bridge-store STATIC=/home/<RPi USERNAME>/bridge-client /usr/bin/node /usr/bin/xyo-pi-bridge
+sudo PORT=80 STORE=/home/<RPi USERNAME>/BridgeX/bridge-store STATIC=/home/<RPi USERNAME>/bridge-client /usr/bin/node /usr/bin/xyo-pi-bridge
 ```
 4. Create a file at `/etc/systemd/system/xyo-bridge.service` and paste the following:
 ```
