@@ -1,5 +1,11 @@
-.bin
-.vscode
-!node_modules/@xyo-network
 !node_modules/@abandonware
+!node_modules/@xyo-network
+.bin
+.cache
+.github
+.package-lock.json
+.vscode
+build
+dist
 node_modules
+tsconfig.tsbuildinfo
