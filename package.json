@@ -5,9 +5,13 @@
     "@abandonware/noble": "^1.9.2-9",
     "@xyo-network/ble-central.noble": "^0.109.0",
     "@xyo-network/bridge-ble": "^0.42.0",
-    "@xyo-network/bridge.pi": "^0.131.0"
+    "@xyo-network/bridge.pi": "^0.131.0",
+    "@xyo-network/wifi-manager": "^0.42.0",
+    "rpi-wifi-connection": "^1.0.17"
   },
   "devDependencies": {
-    "@types/debug": "^4.1.8"
+    "@types/debug": "^4.1.8",
+    "@types/node": "^20.6.2",
+    "typescript": "^5.2.2"
   }
 }
