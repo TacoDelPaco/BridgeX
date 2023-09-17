@@ -67,7 +67,7 @@ You should now have a fully automated BridgeX running on an updated NodeJS, OS, 
 
 ## NVM
 `sudo` won't work, so you'll need to either allow `sudo` or configure to allow access with `node`
-### sudo
+### Running with sudo
 1. Edit `~/.nvm/nvm.sh` and paste the following:
 ```
 alias node='$NVM_BIN/node'
@@ -89,6 +89,15 @@ main()
 
 sudo PORT=80 STORE=/home/<RPi USERNAME>/BridgeX/bridge-store STATIC=/home/<RPi USERNAME>/bridge-client /home/<RPi Username>/.nvm/versions/node/<Node Version>/bin/node /usr/bin/xyo-pi-bridge
 ```
+### Running without sudo
+Run the following command:
+
+`sudo setcap cap_net_bind_service,cap_net_raw+eip $(eval readlink -f `which node`)`
+This grants the Node binary cap_net_raw & cap_net_bind_service privileges, so it can start/stop BLE advertising and listen on port 80
+
+> **Note:** The above command requires setcap to be installed. It can be installed the following way:
+
+`sudo apt-get install libcap2-bin`
 
 [⌐◨-◨ maintained by Taco](https://x.com/omghax)
 
