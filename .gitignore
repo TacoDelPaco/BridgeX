@@ -1,25 +1,29 @@
-!node_modules/@abandonware
-!node_modules/@xyo-network
-node_modules/@abandonware/node-addon-api
+# Don't ignore these
+!node_modules/@abandonware/*
+!node_modules/@xyo-network/*
+
+# Hidden dirs/file extensions
 .bin
 .cache
+.filters
 .github
-.package-lock.json
-.vscode
 .ldlb
 .log
+.package-lock.json
 .sln
 .vcxproj
-.filters
+.vscode
+
+# Ignore these
+build
 CURRENT
+dist
+examples
+LICENSE
 LOCK
 LOG
 LOG.old
 MANIFEST-*
-LICENSE
-examples
-build
-Release
-dist
 node_modules/.bin
+Release
 tsconfig.tsbuildinfo
