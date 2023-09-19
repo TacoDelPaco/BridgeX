@@ -10,8 +10,12 @@
     "rpi-wifi-connection": "^1.0.17"
   },
   "devDependencies": {
+    "@types/bs58": "^4.0.2",
     "@types/debug": "^4.1.8",
     "@types/node": "^20.6.2",
     "typescript": "^5.2.2"
+  },
+  "scripts": {
+    "start": "node node_modules/@xyo-network/bridge.pi/bin/start.js"
   }
 }
