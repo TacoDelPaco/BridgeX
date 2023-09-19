@@ -4,10 +4,8 @@
     "@abandonware/bluetooth-hci-socket": "^0.5.3-10",
     "@abandonware/noble": "^1.9.2-9",
     "@xyo-network/ble-central.noble": "^0.109.0",
-    "@xyo-network/bridge-ble": "^0.42.0",
     "@xyo-network/bridge.pi": "^0.131.0",
-    "@xyo-network/wifi-manager": "^0.42.0",
-    "rpi-wifi-connection": "^1.0.17"
+    "@xyo-network/wifi-manager": "^0.42.0"
   },
   "devDependencies": {
     "@types/bs58": "^4.0.2",
