@@ -65,8 +65,11 @@ WantedBy=multi-user.target
 
 You should now have a fully automated BridgeX running on an updated NodeJS, OS, RPiZ2W, etc.
 
-## NVM
-`sudo` won't work, so you'll need to either allow `sudo` or configure to allow access with `node`
+## NVM / sudoless
+> **Note:** Be sure and edit `<RPi Username>` in each file to whatever you set the Raspbian OS username to when setting it up/formatting
+
+Running `nvm`, `sudo` won't work, so you'll need to either allow `sudo` or configure to allow access with `node`
+
 ### Running with sudo
 1. Edit `~/.nvm/nvm.sh` and paste the following:
 ```
@@ -74,30 +77,37 @@ alias node='$NVM_BIN/node'
 # possibly adding an alias for npm as well?
 alias sudo='sudo '
 ```
+
+### Running without sudo
+Run the following command:
+
+```
+sudo setcap cap_net_bind_service,cap_net_raw+eip $(eval readlink -f `which node`)
+```
+
+This grants the Node binary cap_net_raw & cap_net_bind_service privileges, so it can start/stop BLE advertising and listen on port 80
+
+> **Note:** The above command requires setcap to be installed, also this method does not _require_ [NVM](https://github.com/nvm-sh/nvm)
+
+`sudo apt-get install libcap2-bin`
+
+### NVM
+
 > You'll also need to edit wherever `node` is linked and replace it with a static link to the NVM version you're using
-2. Edit `/usr/bin/xyo-bridge` and change the first line
+1. Edit `/usr/bin/xyo-bridge` and change the first line
 ```
 #!/home/<RPi Username>/.nvm/versions/node/<Node Version>/bin/node
 
-const { main } = require('/home/<RPi USERNAME>/BridgeX/node_modules/@xyo-network/bridge.pi/dist/index.js');
+const { main } = require('../dist/index.js');
 
 main()
 ```
-3. Edit `/usr/local/bin/xyo-bridge-start.sh` and change where `node` is referenced
+2. Edit `/usr/local/bin/xyo-bridge-start.sh` and change where `node` is referenced
 ```
 #!/bin/bash
 
 sudo PORT=80 STORE=/home/<RPi USERNAME>/BridgeX/bridge-store STATIC=/home/<RPi USERNAME>/bridge-client /home/<RPi Username>/.nvm/versions/node/<Node Version>/bin/node /usr/bin/xyo-pi-bridge
 ```
-### Running without sudo
-Run the following command:
-
-`sudo setcap cap_net_bind_service,cap_net_raw+eip $(eval readlink -f `which node`)`
-This grants the Node binary cap_net_raw & cap_net_bind_service privileges, so it can start/stop BLE advertising and listen on port 80
-
-> **Note:** The above command requires setcap to be installed. It can be installed the following way:
-
-`sudo apt-get install libcap2-bin`
 
 [⌐◨-◨ maintained by Taco](https://x.com/omghax)
 
