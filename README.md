@@ -95,7 +95,9 @@ sudo PORT=80 STORE=/home/<RPi USERNAME>/BridgeX/bridge-store STATIC=/home/<RPi U
 ### Running without sudo
 Run the following command:
 
-`sudo setcap cap_net_bind_service,cap_net_raw+eip $(eval readlink -f 'which node')`
+```
+sudo setcap cap_net_bind_service,cap_net_raw+eip $(eval readlink -f `which node`)
+```
 
 This grants the Node binary cap_net_raw & cap_net_bind_service privileges, so it can start/stop BLE advertising and listen on port 80
 
