@@ -7,4 +7,5 @@
 .vscode
 build
 dist
+node_modules/.bin
 tsconfig.tsbuildinfo
