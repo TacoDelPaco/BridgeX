@@ -65,9 +65,12 @@ WantedBy=multi-user.target
 
 You should now have a fully automated BridgeX running on an updated NodeJS, OS, RPiZ2W, etc.
 
-## NVM
-`sudo` won't work, so you'll need to either allow `sudo` or configure to allow access with `node`
-### Running with sudo
+## NVM / sudoless
+> **Note:** Be sure and edit `<RPi Username>` in each file to whatever you set the Raspbian OS username to when setting it up/formatting
+
+Running `nvm`, `sudo` won't work, so you'll need to either allow `sudo` or configure to allow access with `node`
+
+### Running with nvm & sudo
 1. Edit `~/.nvm/nvm.sh` and paste the following:
 ```
 alias node='$NVM_BIN/node'
@@ -92,10 +95,11 @@ sudo PORT=80 STORE=/home/<RPi USERNAME>/BridgeX/bridge-store STATIC=/home/<RPi U
 ### Running without sudo
 Run the following command:
 
-`sudo setcap cap_net_bind_service,cap_net_raw+eip $(eval readlink -f `which node`)`
+`sudo setcap cap_net_bind_service,cap_net_raw+eip $(eval readlink -f 'which node')`
+
 This grants the Node binary cap_net_raw & cap_net_bind_service privileges, so it can start/stop BLE advertising and listen on port 80
 
-> **Note:** The above command requires setcap to be installed. It can be installed the following way:
+> **Note:** The above command requires setcap to be installed, also this method does not _require_ [NVM](https://github.com/nvm-sh/nvm)
 
 `sudo apt-get install libcap2-bin`
 
