@@ -10,10 +10,13 @@
   "devDependencies": {
     "@types/bs58": "^4.0.2",
     "@types/debug": "^4.1.8",
+    "@types/jsonwebtoken": "^9.0.3",
     "@types/node": "^20.6.2",
+    "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   },
   "scripts": {
-    "start": "node node_modules/@xyo-network/bridge.pi/bin/start.js"
+    "start": "ts-node node_modules/@xyo-network/bridge.pi/bin/start.js --trace-warnings",
+    "build": "tsc node_modules/@xyo-network/**/src/*.ts --sourceMap"
   }
 }
