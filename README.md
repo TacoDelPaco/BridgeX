@@ -16,7 +16,7 @@ If you're wanting to use the original **bridgex.img** with the RPiZW, you can si
 1. Clone the repository in home directory
    `git clone https://github.com/TacoDelPaco/BridgeX`
 2. Run `npm rebuild --unsafe-perm --build-from-source` in the root of the project directory
-3. Run `node node_modules/@xyo-network/bridge.pi/bin/start.js` or `npm start`
+3. Run `node node_modules/@xyo-network/bridge.pi/bin/start.js`
 
 Everything should be running, although you may want to put it in a `screen` or `tmux` to be able to run in the background. The web side of things also doesn't work, as it requires more steps which I include in the next section.
 
@@ -36,11 +36,11 @@ Everything should be running, although you may want to put it in a `screen` or `
 ```
 #!/usr/bin/env node
 
-const { main } = require('../dist/index.js');
+const { main } = require('/home/<RPi Username>/BridgeX/node_modules/@xyo-network/bridge.pi/dist/index.js');
 
 main()
 ```
-3. Create a file at `/usr/local/bin/xyo-bridge-start.sh`, run `sudo chmod +x /usr/local/bin/xyo-bridge-start.sh` and paste the following:
+3. Create a file at `/usr/local/bin/xyo-bridge-start.sh` and paste the following:
 ```
 #!/bin/bash
 
@@ -70,16 +70,30 @@ You should now have a fully automated BridgeX running on an updated NodeJS, OS, 
 
 Running `nvm`, `sudo` won't work, so you'll need to either allow `sudo` or configure to allow access with `node`
 
-### Running with sudo
+### Running with nvm & sudo
 1. Edit `~/.nvm/nvm.sh` and paste the following:
 ```
 alias node='$NVM_BIN/node'
 # possibly adding an alias for npm as well?
 alias sudo='sudo '
 ```
+> You'll also need to edit wherever `node` is linked and replace it with a static link to the NVM version you're using
+2. Edit `/usr/bin/xyo-bridge` and change the first line
+```
+#!/home/<RPi Username>/.nvm/versions/node/<Node Version>/bin/node
 
+const { main } = require('/home/<RPi USERNAME>/BridgeX/node_modules/@xyo-network/bridge.pi/dist/index.js');
+
+main()
+```
+3. Edit `/usr/local/bin/xyo-bridge-start.sh` and change where `node` is referenced
+```
+#!/bin/bash
+
+sudo PORT=80 STORE=/home/<RPi USERNAME>/BridgeX/bridge-store STATIC=/home/<RPi USERNAME>/bridge-client /home/<RPi Username>/.nvm/versions/node/<Node Version>/bin/node /usr/bin/xyo-pi-bridge
+```
 ### Running without sudo
-1. Run the following command:
+Run the following command:
 
 ```
 sudo setcap cap_net_bind_service,cap_net_raw+eip $(eval readlink -f `which node`)
@@ -90,24 +104,6 @@ This grants the Node binary cap_net_raw & cap_net_bind_service privileges, so it
 > **Note:** The above command requires setcap to be installed, also this method does not _require_ [NVM](https://github.com/nvm-sh/nvm)
 
 `sudo apt-get install libcap2-bin`
-
-### NVM
-
-> You'll also need to edit wherever `node` is linked and replace it with a static link to the NVM version you're using
-1. Edit `/usr/bin/xyo-bridge` and change the first line to the results of `which node`:
-```
-#!/home/<RPi Username>/.nvm/versions/node/v<NodeJS Version>/bin/node
-
-const { main } = require('../dist/index.js');
-
-main()
-```
-2. Edit `/usr/local/bin/xyo-bridge-start.sh` and change where `node` is referenced:
-```
-#!/bin/bash
-
-sudo PORT=80 STORE=/home/<RPi USERNAME>/BridgeX/bridge-store STATIC=/home/<RPi USERNAME>/bridge-client /home/<RPi Username>/.nvm/versions/node/v<NodeJS Version>/bin/node /usr/bin/xyo-pi-bridge
-```
 
 [⌐◨-◨ maintained by Taco](https://x.com/omghax)
 
