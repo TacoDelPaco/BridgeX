@@ -8,6 +8,8 @@
     "@xyo-network/bridge.pi": "^0.131.0"
   },
   "devDependencies": {
+    "@jridgewell/sourcemap-codec": "^1.4.15",
+    "@jridgewell/trace-mapping": "^0.3.19",
     "@types/bs58": "^4.0.2",
     "@types/debug": "^4.1.8",
     "@types/jest": "^29.5.5",
@@ -21,7 +23,7 @@
     "typescript": "^5.2.2"
   },
   "scripts": {
-    "start": "ts-node node_modules/@xyo-network/bridge.pi/bin/start.js --trace-warnings",
+    "start": "node node_modules/@xyo-network/bridge.pi/bin/start.js --trace-warnings",
     "build": "tsc node_modules/@xyo-network/**/src/*.ts --sourceMap"
   }
 }
