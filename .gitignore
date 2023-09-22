@@ -5,10 +5,13 @@
 # Hidden dirs/file extensions
 .bin
 .cache
+.core-js-*
 .filters
 .github
 .ldlb
 .log
+.map
+.node-*
 .package-lock.json
 .sln
 .vcxproj
@@ -24,6 +27,5 @@ LOCK
 LOG
 LOG.old
 MANIFEST-*
-node_modules/.bin
 Release
 tsconfig.tsbuildinfo

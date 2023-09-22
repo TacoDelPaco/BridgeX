@@ -65,6 +65,15 @@ WantedBy=multi-user.target
 
 You should now have a fully automated BridgeX running on an updated NodeJS, OS, RPiZ2W, etc.
 
+## Wireless power managment
+If you notice your Pi's wireless timing out/disconnecting after some time, you may need to disable wireless power managment.
+
+Edit `/etc/rc.local` and add before `exit 0`:
+> 
+```
+/sbin/iwconfig wlan0 power off
+```
+
 ## NVM / sudoless
 > **Note:** Be sure and edit `<RPi Username>` in each file to whatever you set the Raspbian OS username to when setting it up/formatting
 
