@@ -16,7 +16,7 @@ If you're wanting to use the original **bridgex.img** with the RPiZW, you can si
 1. Clone the repository in home directory
    `git clone https://github.com/TacoDelPaco/BridgeX`
 2. Run `npm rebuild --unsafe-perm --build-from-source` in the root of the project directory
-3. Run `node node_modules/@xyo-network/bridge.pi/bin/start.js`
+3. Run `npm start` or `node node_modules/@xyo-network/bridge.pi/bin/start.js`
 
 Everything should be running, although you may want to put it in a `screen` or `tmux` to be able to run in the background. The web side of things also doesn't work, as it requires more steps which I include in the next section.
 
