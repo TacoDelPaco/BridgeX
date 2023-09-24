@@ -3,6 +3,7 @@
 !node_modules/@xyo-network/*
 
 # Hidden dirs/file extensions
+.abstract-leveldown-*
 .bin
 .cache
 .core-js-*
