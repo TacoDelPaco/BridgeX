@@ -7,6 +7,8 @@
 .bin
 .cache
 .core-js-*
+.diff-*
+.eslintrc.cjs
 .filters
 .github
 .ldlb
