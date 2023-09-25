@@ -15,6 +15,7 @@
 .node-*
 .package-lock.json
 .sln
+.tsbuildinfo
 .vcxproj
 .vscode
 
@@ -29,4 +30,3 @@ LOG
 LOG.old
 MANIFEST-*
 Release
-tsconfig.tsbuildinfo
