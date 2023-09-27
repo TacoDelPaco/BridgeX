@@ -16,7 +16,8 @@ If you're wanting to use the original **bridgex.img** with the Pi0W, you can sim
 1. Clone the repository in home directory
    `git clone https://github.com/TacoDelPaco/BridgeX`
 2. Run `npm rebuild --unsafe-perm --build-from-source` in the root of the project directory
-3. Run `npm start` or `node node_modules/@xyo-network/bridge.pi/bin/start.js`
+3. Run `npm install` in the root of the project directory
+4. Run `npm start` or `node node_modules/@xyo-network/bridge.pi/bin/start.js`
 
 Everything should be running, although you may want to put it in a `screen` or `tmux` to be able to run in the background. The web side of things also doesn't work, as it requires more steps which I include in the next section.
 
@@ -40,7 +41,7 @@ After installing, the following steps continue setting up the BridgeX to automat
 ```
 #!/bin/bash
 
-sudo PORT=80 STORE=/home/<RPi Username>/BridgeX/bridge-store STATIC=/home/<RPi Username>/bridge-client /usr/bin/node /usr/bin/xyo-pi-bridge
+sudo PORT=80 STORE=/home/<RPi Username>/BridgeX/bridge-store STATIC=/home/<RPi Username>/BridgeX/bridge-client /usr/bin/node /usr/bin/xyo-pi-bridge
 ```
 4. Set executable permissions on previous file `sudo chmod +x /usr/local/bin/xyo-bridge-start.sh`
 5. Create a file `sudoedit /etc/systemd/system/xyo-bridge.service` and paste the following:
@@ -92,7 +93,7 @@ main()
 ```
 #!/bin/bash
 
-sudo PORT=80 STORE=/home/<RPi USERNAME>/BridgeX/bridge-store STATIC=/home/<RPi USERNAME>/bridge-client /home/<RPi Username>/.nvm/versions/node/<Node Version>/bin/node /usr/bin/xyo-pi-bridge
+sudo PORT=80 STORE=/home/<RPi USERNAME>/BridgeX/bridge-store STATIC=/home/<RPi USERNAME>/BridgeX/bridge-client /home/<RPi Username>/.nvm/versions/node/<Node Version>/bin/node /usr/bin/xyo-pi-bridge
 ```
 ### Running with sudo
 Run `nano ~/.nvm/nvm.sh` and paste the following at the end of the file:
@@ -104,6 +105,7 @@ alias sudo='sudo '
 ```
 ### Running without sudo
 > **Note:** This method does not _require_ [NVM](https://github.com/nvm-sh/nvm)
+
 Run the following command:
 
 ```
@@ -112,7 +114,7 @@ sudo setcap cap_net_bind_service,cap_net_raw+eip $(eval readlink -f `which node`
 
 This grants the Node binary cap_net_raw & cap_net_bind_service privileges, so it can start/stop BLE advertising and listen on port 80
 
-> **Note:** The above command requires setcap to be installed `sudo apt-get install libcap2-bin`
+> **Note:** The above command requires setcap to be installed `sudo apt install libcap2-bin`
 
 [⌐◨-◨ maintained by Taco](https://x.com/omghax)
 

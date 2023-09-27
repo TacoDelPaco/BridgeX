@@ -1,4 +1,9 @@
 {
+  "name": "BridgeX",
+  "description": "A XYO Network bridge",
+  "license": "MIT",
+  "version": "0.131.0",
+  "gitHead": "1d6473a0b56b4237ecfadda96f3978ae4259fa87",
   "dependencies": {
     "@abandonware/bleno": "^0.6.1",
     "@abandonware/bluetooth-hci-socket": "^0.5.3-10",
@@ -22,6 +27,15 @@
     "@types/node": "^20.6.4",
     "@types/node-rsa": "^1.1.1"
   },
+  "files": [
+    "dist/**/**",
+    "docs/**/**",
+    "!**/*.spec.*",
+    "!**/*.json",
+    "!**/*.tsbuildinfo",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
     "start": "node node_modules/@xyo-network/bridge.pi/bin/start.js --trace-warnings",
     "build": "tsc -p node_modules/@xyo-network/*/"
