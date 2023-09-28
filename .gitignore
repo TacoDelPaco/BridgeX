@@ -3,23 +3,7 @@
 !node_modules/@xyo-network
 
 # Hidden dirs/file extensions
-.abstract-leveldown-*
-.bin
-.cache
-.core-js-*
-.diff-*
-.eslintrc.cjs
-.filters
-.github
-.ldlb
-.log
-.map
-.node-*
-.package-lock.json
-.sln
-.tsbuildinfo
-.vcxproj
-.vscode
+.*
 
 # Ignore these
 bridge-store/*
@@ -32,4 +16,5 @@ LOCK
 LOG
 LOG.old
 MANIFEST-*
+package-lock.json
 Release

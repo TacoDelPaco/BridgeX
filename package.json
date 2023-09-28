@@ -1,5 +1,5 @@
 {
-  "name": "BridgeX",
+  "name": "bridgex",
   "description": "A XYO Network bridge",
   "license": "MIT",
   "version": "0.131.0",
@@ -11,8 +11,7 @@
     "@xyo-network/ble-central.noble": "^0.109.0",
     "@xyo-network/ble-peripheral.bleno": "^0.109.0",
     "@xyo-network/bridge.pi": "^0.131.0",
-    "nodejs": "^0.0.0",
-    "typescript": "^5.2.2"
+    "nodejs": "^0.0.0"
   },
   "devDependencies": {
     "@jridgewell/sourcemap-codec": "^1.4.15",
