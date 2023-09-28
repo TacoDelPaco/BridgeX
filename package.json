@@ -38,6 +38,6 @@
   ],
   "scripts": {
     "start": "node node_modules/@xyo-network/bridge.pi/bin/start.js --trace-warnings",
-    "build": "tsc -p node_modules/@xyo-network/*/"
+    "build": "tsc -p node_modules/@xyo-network/bridge.pi"
   }
 }
