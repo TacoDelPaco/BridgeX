@@ -73,6 +73,16 @@ Run `sudoedit /etc/rc.local` and add before `exit 0`:
 /sbin/iwconfig wlan0 power off
 ```
 
+## Bluetooth issues
+> **Note:** Try these at your own risk, I have everything running on all of my Pi's and it seems fine but your mileage may vary
+
+I've been experimenting with options to help with Bluetooth errors, here are a few things that may or may not help (in no particular order):
+* Run `sudoedit /etc/bluetooth/main.conf` and at the bottom add `DisablePlugins=pnat`
+* Run `sudoedit /usr/local/bin/xyo-bridge-start.sh` and add `NOBLE_MULTI_ROLE=1` after `sudo`
+* Run `sudoedit /boot/config.txt` and make sure `otg_mode=1`
+* Run `sudoedit /boot/cmdline.txt` and add `dwc_otg.microframe_schedule=1 dwc_otg.speed=1` before the `rootwait` parameter
+* Run `sudo systemctl stop bluetooth && sudo hciconfig hci0 up` as noted in the [Bleno](https://github.com/abandonware/bleno?tab=readme-ov-file#linux) README
+
 ## NVM / sudo / sudoless
 > **Note:** Be sure and edit `<RPi Username>` in each file to whatever you set the Raspbian OS username to when setting it up/formatting
 
