@@ -3,8 +3,23 @@
 !node_modules/@xyo-network
 
 # Hidden dirs/file extensions
-.*
-*.tsbuildinfo
+.abstract-leveldown-*
+.bin
+.cache
+.core-js-*
+.diff-*
+.eslintrc.cjs
+.filters
+.github
+.ldlb
+.log
+.map
+.node-*
+.package-lock.json
+.sln
+.tsbuildinfo
+.vcxproj
+.vscode
 
 node_modules/**/node_modules
 
