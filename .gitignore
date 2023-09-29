@@ -21,3 +21,5 @@ LOG.old
 MANIFEST-*
 package-lock.json
 Release
+docs
+test

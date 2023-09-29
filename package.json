@@ -12,8 +12,12 @@
     "@xyo-network/ble-peripheral.bleno": "^0.109.0",
     "@xyo-network/bridge.pi": "^0.131.0",
     "node-pre-gyp": "^0.17.0",
+    "node-gyp-build": "^4.6.1",
     "nodejs": "^0.0.0",
     "semver": "^7.5.4"
+  },
+  "optionalDependencies": {
+    "usb": "^1.9.2"
   },
   "devDependencies": {
     "@jridgewell/sourcemap-codec": "^1.4.15",
