@@ -1,6 +1,8 @@
 {
   "short_name": "XYO Bridge",
   "name": "XYO Bridge Manager",
+  "version": "0.131.0",
+  "manifest_version": 2,
   "icons": [
     {
       "src": "favicon.ico",

@@ -4,6 +4,9 @@
 
 # Hidden dirs/file extensions
 .*
+*.tsbuildinfo
+
+node_modules/**/node_modules
 
 # Ignore these
 bridge-store/*
