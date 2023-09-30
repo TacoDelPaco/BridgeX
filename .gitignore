@@ -3,38 +3,27 @@
 !node_modules/@xyo-network
 
 # Hidden dirs/file extensions
-.abstract-leveldown-*
+*.map
 .bin
 .cache
-.core-js-*
-.diff-*
 .eslintrc.cjs
-.filters
-.github
-.ldlb
-.log
-.map
-.node-*
 .package-lock.json
-.sln
-.tsbuildinfo
-.vcxproj
+.prettierrc
 .vscode
-
-node_modules/**/node_modules
 
 # Ignore these
 bridge-store/*
-build
-CURRENT
-dist
-examples
-LICENSE
-LOCK
-LOG
-LOG.old
-MANIFEST-*
+node_modules/**/node_modules
 package-lock.json
-Release
-docs
-test
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Compiled binary addons (https://nodejs.org/api/addons.html)
+build/
