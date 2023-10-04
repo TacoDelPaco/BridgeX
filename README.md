@@ -25,7 +25,7 @@ Everything should be running, although you may want to put it in a `screen` or `
 
 ## Configuration
 
-> **Note:** Be sure and edit `<RPi Username>` in each file to whatever you set the Raspbian OS username to when setting it up/formatting
+> **Note:** Be sure and edit `<Pi Username>` in each file to whatever you set the Raspbian OS username to when setting it up/formatting
 
 After installing, the following steps continue setting up the BridgeX to automatically start and run the webserver but is not required.
 
@@ -38,16 +38,16 @@ After installing, the following steps continue setting up the BridgeX to automat
 @xset s off
 @xset -dpms
 @xset s noblank
-@chromium-browser --noerrdialogs --disable-infobars --kiosk --app=file:///home/<RPi USERNAME>/BridgeX/bridge-client/loader.html
+@chromium-browser --noerrdialogs --disable-infobars --kiosk --app=file:///home/<Pi USERNAME>/BridgeX/bridge-client/loader.html
 ```
 
-2. Create a symbolic link `sudo ln -s /home/<RPi Username>/BridgeX/node_modules/@xyo-network/bridge.pi/bin/start.js /usr/bin/xyo-pi-bridge`
+2. Create a symbolic link `sudo ln -s /home/<Pi Username>/BridgeX/node_modules/@xyo-network/bridge.pi/bin/start.js /usr/bin/xyo-pi-bridge`
 3. Create a file `sudoedit /usr/local/bin/xyo-bridge-start.sh` and paste the following:
 
 ```
 #!/bin/bash
 
-sudo PORT=80 STORE=/home/<RPi Username>/BridgeX/bridge-store STATIC=/home/<RPi Username>/BridgeX/bridge-client /usr/bin/node /usr/bin/xyo-pi-bridge
+sudo PORT=80 STORE=/home/<Pi Username>/BridgeX/bridge-store STATIC=/home/<Pi Username>/BridgeX/bridge-client /usr/bin/node /usr/bin/xyo-pi-bridge
 ```
 
 4. Set executable permissions on previous file `sudo chmod +x /usr/local/bin/xyo-bridge-start.sh`
@@ -100,7 +100,7 @@ I've been experimenting with options to help with Bluetooth errors, here are a f
 
 ## NVM / sudo / sudoless
 
-> **Note:** Be sure and edit `<RPi Username>` in each file to whatever you set the Raspbian OS username to when setting it up/formatting
+> **Note:** Be sure and edit `<Pi Username>` in each file to whatever you set the Raspbian OS username to when setting it up/formatting
 
 Running `nvm`, you'll need to update where `node` is referenced and also `sudo` won't work, so you'll need to either allow `sudo` or configure your Pi to allow access with `node`
 
@@ -111,7 +111,7 @@ You'll need to edit wherever `node` is linked and replace it with a static link 
 1. Run `sudoedit /usr/bin/xyo-pi-bridge` and change the first line:
 
 ```
-#!/home/<RPi Username>/.nvm/versions/node/<Node Version>/bin/node
+#!/home/<Pi Username>/.nvm/versions/node/<Node Version>/bin/node
 
 const { main } = require('../dist/index.js');
 
@@ -123,7 +123,7 @@ main()
 ```
 #!/bin/bash
 
-sudo PORT=80 STORE=/home/<RPi USERNAME>/BridgeX/bridge-store STATIC=/home/<RPi USERNAME>/BridgeX/bridge-client /home/<RPi Username>/.nvm/versions/node/<Node Version>/bin/node /usr/bin/xyo-pi-bridge
+sudo PORT=80 STORE=/home/<Pi USERNAME>/BridgeX/bridge-store STATIC=/home/<Pi USERNAME>/BridgeX/bridge-client /home/<Pi Username>/.nvm/versions/node/<Node Version>/bin/node /usr/bin/xyo-pi-bridge
 ```
 
 ### Running with sudo
@@ -148,6 +148,11 @@ sudo setcap cap_net_bind_service,cap_net_raw+eip $(eval readlink -f `which node`
 ```
 
 This grants the Node binary cap_net_raw & cap_net_bind_service privileges, so it can start/stop BLE advertising and listen on port 80
+
+You can then edit the following files to switch from using root:
+
+1. Run `sudoedit /usr/local/bin/xyo-bridge-start.sh` and remove `sudo `
+2. Run `sudoedit /etc/systemd/system/xyo-bridge.service` and update `User=root` to `User=<Pi Username>`
 
 > **Note:** The above command requires setcap to be installed `sudo apt install libcap2-bin`
 
