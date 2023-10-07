@@ -12,6 +12,7 @@
 .vscode
 
 # Ignore these
+bluetooth_hci_socket.node
 bridge-store/*
 node_modules/**/node_modules
 package-lock.json
