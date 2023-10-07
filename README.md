@@ -72,9 +72,9 @@ WantedBy=multi-user.target
 
 You should now have a fully automated BridgeX running on an updated NodeJS, OS, Pi02W, etc. 🎉
 
-Depending on your Pi's `hostname` you should be able to visit it via http://raspberrypi.lan (might require [Bonjour](https://support.apple.com/kb/dl999?locale=en_US)) or http://raspberrypi.local with the default password `geohacker`
+Depending on your Pi's `hostname` you should be able to visit it via http://raspberrypi.lan (might require [Bonjour](https://support.apple.com/kb/dl999?locale=en_US)) or http://raspberrypi.local with the default password `geohacker`.
 
-## Wireless power managment
+## Wireless issues
 
 If you notice your Pi's wireless timing out/disconnecting after some time, you may need to disable wireless power managment.
 
@@ -90,19 +90,21 @@ Run `sudoedit /etc/rc.local` and add before `exit 0`:
 
 I've been experimenting with options to help with Bluetooth errors, here are a few things that may or may not help (in no particular order):
 
-- Run `sudoedit /usr/local/bin/xyo-bridge-start.sh` and add `NOBLE_MULTI_ROLE=1` after `sudo`
+- Run `sudoedit /usr/local/bin/xyo-bridge-start.sh` and add `NOBLE_MULTI_ROLE=1` after `sudo` or before ` PORT=80`
 - Run `sudoedit /boot/config.txt` and make sure `otg_mode=1`
 - Run `sudoedit /boot/cmdline.txt` and add `dwc_otg.microframe_schedule=1 dwc_otg.speed=1` before the `rootwait` parameter
 
-> **Note:** I've had the most problems with this one, when it works it works but I can't figure out why it breaks either 🤔
+> **Note:** If your Pi's Bluetooth is segfaulting, you might need to disable Bluetooth and reboot
 
-- Run `sudo systemctl stop bluetooth && sudo hciconfig hci0 up` as noted in the [Bleno](https://github.com/abandonware/bleno?tab=readme-ov-file#linux) README
+- Run `sudo systemctl disable bluetooth` and `sudo reboot`
+
+As noted in the [Bleno](https://github.com/abandonware/bleno?tab=readme-ov-file#linux) README. After rebooting, BridgeX seems to re-enable Bluetooth but the error stopped occuring 🤷. Also, sometimes you don't need to reboot - only if you're noticing the Noble scanner to unendingly loop or obviously the segfault mentioned prior.
 
 ## NVM / sudo / sudoless
 
 > **Note:** Be sure and edit `<Pi Username>` in each file to whatever you set the Raspbian OS username to when setting it up/formatting
 
-Running `nvm`, you'll need to update where `node` is referenced and also `sudo` won't work, so you'll need to either allow `sudo` or configure your Pi to allow access with `node`
+Running `nvm`, you'll need to update where `node` is referenced and also `sudo` won't work, so you'll need to either allow `sudo` or configure your Pi to allow access with `node`.
 
 ### Running with nvm
 
@@ -147,7 +149,7 @@ Run the following command:
 sudo setcap cap_net_bind_service,cap_net_raw+eip $(eval readlink -f `which node`)
 ```
 
-This grants the Node binary cap_net_raw & cap_net_bind_service privileges, so it can start/stop BLE advertising and listen on port 80
+This grants the Node binary **cap_net_raw & cap_net_bind_service** privileges, so it can start/stop BLE advertising and listen on port 80.
 
 You can then edit the following files to switch from using root:
 
