@@ -108,19 +108,9 @@ Running `nvm`, you'll need to update where `node` is referenced and also `sudo` 
 
 ### Running with nvm
 
-You'll need to edit wherever `node` is linked and replace it with a static link to the NVM version you're using.
+You'll need to edit wherever `node` is linked and replace it with a static link to the NVM version you're using. It seems you no longer have to edit `/usr/bin/xyo-pi-bridge`.
 
-1. Run `sudoedit /usr/bin/xyo-pi-bridge` and change the first line:
-
-```
-#!/home/<Pi Username>/.nvm/versions/node/<Node Version>/bin/node
-
-const { main } = require('../dist/index.js');
-
-main()
-```
-
-2. Run `sudoedit /usr/local/bin/xyo-bridge-start.sh` and change where `node` is referenced:
+Run `sudoedit /usr/local/bin/xyo-bridge-start.sh` and change where `node` is referenced:
 
 ```
 #!/bin/bash
