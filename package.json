@@ -48,7 +48,7 @@
     "README.md"
   ],
   "scripts": {
-    "start": "node node_modules/@xyo-network/bridge.pi/bin/start.js --trace-warnings",
+    "start": "node --trace-warnings node_modules/@xyo-network/bridge.pi/bin/start.js",
     "build": "tsc -p node_modules/@xyo-network/bridge.pi"
   }
 }
